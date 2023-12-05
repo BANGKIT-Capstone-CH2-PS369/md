@@ -15,11 +15,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val menu = menu()
-        val chat = chat()
-        val camera = camera()
-        val favorite = favorite()
-        val profile = profile()
+        val menu = MenuActivity()
+        val chat = ChatActivity()
+        val camera = CameraActivity()
+        val favorite = FavoriteActivity()
+        val profile = ProfileActivity()
 
         setCurrentFragment(menu)
 
