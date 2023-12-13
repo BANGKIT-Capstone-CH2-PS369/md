@@ -17,6 +17,10 @@
     <string name="email">Email</string>
     <string name="favorite">Favorite</string>
     <string name="setting">Settings</string>
+    <string name="menuhead">Find What Food You Can Make !!</string>
+    <string name="recent">Recent Recipe</string>
+    <string name="profile">Profile</string>
+    <string name="register">Register</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
