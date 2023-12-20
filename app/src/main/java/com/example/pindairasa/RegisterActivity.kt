@@ -1,40 +1,61 @@
 package com.example.pindairasa
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.os.PersistableBundle
+import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.lifecycle.ViewModelProvider
 import com.example.pindairasa.databinding.ActivityRegisterBinding
+import com.example.pindairasa.model.RegisterViewModel
+
 
 class RegisterActivity : AppCompatActivity() {
-
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityRegisterBinding
+    private lateinit var userviewmodel:RegisterViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onCreate(savedInstanceState, persistentState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
+    }
 
-        val navController = findNavController(R.id.nav_host_fragment_content_register)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+    private fun setupAction(){
+        binding.signupbtn.setOnClickListener{
+            showLoading(true)
+            val name = binding.username.text.toString()
+            val email = binding.email.text.toString()
+            val password = binding.password.text.toString()
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            userviewmodel.registerUser(name, email, password) { response ->
+
+                showLoading(false)
+                if (response.error == true){
+                    Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
+                }else{
+                    AlertDialog.Builder(this).apply {
+                        setTitle("Yeah!")
+                        setMessage(response.message)
+                        setPositiveButton("Lanjut") { _, _ ->
+                            finish()
+                        }
+                        create()
+                        show()
+                    }
+                }
+            }
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_register)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+
+    private fun showLoading(state: Boolean) { binding.progressBar.visibility = if (state) View.VISIBLE else View.GONE }
+
+    private fun obtainViewModel(activity: AppCompatActivity): RegisterViewModel {
+        val factory = ViewModelFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory)[RegisterViewModel::class.java]
     }
+
+
 }
