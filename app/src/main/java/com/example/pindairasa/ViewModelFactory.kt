@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.pindairasa.di.Injection
+import com.example.pindairasa.model.LoginViewModel
 import com.example.pindairasa.model.RegisterViewModel
 import com.example.pindairasa.repository.repo
 
@@ -13,6 +14,9 @@ class ViewModelFactory(private val repository: repo) : ViewModelProvider.NewInst
         return when {
             modelClass.isAssignableFrom(RegisterViewModel::class.java) -> {
                 RegisterViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
+                LoginViewModel(repository) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

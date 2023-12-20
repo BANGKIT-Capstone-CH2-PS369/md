@@ -12,5 +12,15 @@
         android:layout_height="?attr/actionBarSize"
         app:menu="@menu/option_menu"
         app:title="@string/setting" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/theme"
+        android:text="Tema"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/logout"
+        android:text="Logout"/>
 
 </LinearLayout>
