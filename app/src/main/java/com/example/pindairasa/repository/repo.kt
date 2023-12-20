@@ -2,6 +2,7 @@ package com.example.pindairasa.repository
 
 import com.example.pindairasa.API.ApiService
 import com.example.pindairasa.API.LoginRequest
+import com.example.pindairasa.API.RegisterRequest
 import com.example.pindairasa.pref.UserModel
 import com.example.pindairasa.pref.UserPreference
 import com.example.pindairasa.response.LoginResponse
@@ -24,8 +25,8 @@ class repo private constructor(
         userPreference.logout()
     }
 
-    suspend fun registerUser(name: String, email: String, password: String): RegisterResponse {
-        return apiService.register(name, email, password)
+    suspend fun registerUser(registerRequest: RegisterRequest): RegisterResponse {
+        return apiService.register(registerRequest)
     }
 
     suspend fun login(loginRequest:LoginRequest): LoginResponse {

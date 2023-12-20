@@ -1,24 +1,26 @@
 package com.example.pindairasa
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.pindairasa.databinding.ActivityRegisterBinding
 import com.example.pindairasa.model.RegisterViewModel
-
-
 class RegisterActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityRegisterBinding
-    private lateinit var userviewmodel:RegisterViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    private val userviewModel by viewModels<RegisterViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
+    private lateinit var binding: ActivityRegisterBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setupAction()
 
     }
 
@@ -28,16 +30,17 @@ class RegisterActivity : AppCompatActivity() {
             val name = binding.username.text.toString()
             val email = binding.email.text.toString()
             val password = binding.password.text.toString()
+            val repassword = binding.repassword.text.toString()
 
-            userviewmodel.registerUser(name, email, password) { response ->
+            userviewModel.registerUser(name, email, password, repassword) { response ->
 
                 showLoading(false)
                 if (response.error == true){
-                    Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Gagal", Toast.LENGTH_SHORT).show()
                 }else{
                     AlertDialog.Builder(this).apply {
                         setTitle("Yeah!")
-                        setMessage(response.message)
+                        setMessage("Berhasil")
                         setPositiveButton("Lanjut") { _, _ ->
                             finish()
                         }
@@ -52,10 +55,6 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun showLoading(state: Boolean) { binding.progressBar.visibility = if (state) View.VISIBLE else View.GONE }
 
-    private fun obtainViewModel(activity: AppCompatActivity): RegisterViewModel {
-        val factory = ViewModelFactory.getInstance(activity.application)
-        return ViewModelProvider(activity, factory)[RegisterViewModel::class.java]
-    }
 
 
 }

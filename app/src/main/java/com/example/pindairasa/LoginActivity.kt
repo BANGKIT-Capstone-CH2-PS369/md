@@ -42,6 +42,11 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+
+        binding.createacc.setOnClickListener{
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun showLoading(state: Boolean) { binding.progressBar.visibility = if (state) View.VISIBLE else View.GONE }
