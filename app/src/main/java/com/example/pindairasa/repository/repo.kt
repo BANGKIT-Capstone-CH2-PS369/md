@@ -1,6 +1,7 @@
 package com.example.pindairasa.repository
 
 import com.example.pindairasa.API.ApiService
+import com.example.pindairasa.API.LoginRequest
 import com.example.pindairasa.pref.UserModel
 import com.example.pindairasa.pref.UserPreference
 import com.example.pindairasa.response.LoginResponse
@@ -27,8 +28,8 @@ class repo private constructor(
         return apiService.register(name, email, password)
     }
 
-    suspend fun login(email: String, password: String): LoginResponse {
-        return apiService.login(email, password)
+    suspend fun login(loginRequest:LoginRequest): LoginResponse {
+        return apiService.login(loginRequest)
     }
 
     companion object {

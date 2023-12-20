@@ -46,14 +46,15 @@
 
         <Button
             android:id="@+id/loginbtn"
-            android:background="@drawable/edittext"
-            android:layout_marginTop="20dp"
             android:layout_width="250dp"
             android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edittext"
             android:text="@string/login"
-            android:textSize="20sp"
             android:textColor="@color/black"
-            android:layout_gravity="center"/>
+            android:textSize="20sp" />
+
         <TextView
             android:id="@+id/createacc"
             android:layout_marginTop="20dp"
@@ -62,6 +63,13 @@
             android:layout_gravity="center"
             android:text="@string/create_an_a"
             android:textSize="20sp"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
 
     </LinearLayout>
 

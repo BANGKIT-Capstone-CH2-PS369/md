@@ -13,14 +13,20 @@
         android:layout_height="?attr/actionBarSize"
         app:menu="@menu/option_menu"
         app:title="@string/favorite" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView2"
+            android:layout_width="409dp"
+            android:layout_height="729dp"
+            android:layout_marginTop="1dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/cardview_fav"/>
+    </ScrollView>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView2"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:layout_marginTop="1dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
 
 </LinearLayout>
