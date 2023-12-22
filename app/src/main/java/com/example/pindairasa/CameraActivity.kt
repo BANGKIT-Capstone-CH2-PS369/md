@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.pindairasa.databinding.FragmentCameraBinding
 import com.example.pindairasa.ml.Model
@@ -46,17 +47,9 @@ class CameraActivity : Fragment(R.layout.fragment_camera) {
             val bitmap2 = (binding.image2.drawable as BitmapDrawable).bitmap
             val bitmap3 = (binding.image3.drawable as BitmapDrawable).bitmap
 
-            processImage(binding.image1, bitmap1)
-            binding.bahan1.setText("Daging Ayam")
-            processImage(binding.image2, bitmap2)
-            binding.bahan2.setText("Telur")
-            processImage(binding.image3, bitmap3)
-            binding.bahan3.setText("Cabai Merah")
-        }
-
-        binding.start.setOnClickListener {
-            val intent = Intent(requireContext(), RecommendationActivity::class.java)
-            startActivity(intent)
+            processImage(binding.image1, binding.bahan1, bitmap1)
+            processImage(binding.image2, binding.bahan2, bitmap2)
+            processImage(binding.image3, binding.bahan3, bitmap3)
         }
 
         return view
@@ -91,7 +84,7 @@ class CameraActivity : Fragment(R.layout.fragment_camera) {
         }
     }
 
-    private fun processImage(imageView: ImageView, image: Bitmap) {
+    private fun processImage(imageView: ImageView, textView: TextView, image: Bitmap) {
         try {
             val model = Model.newInstance(requireContext())
 
@@ -137,9 +130,9 @@ class CameraActivity : Fragment(R.layout.fragment_camera) {
             }
 
             if (maxPos < labels.size) {
-
+                textView.text = labels[maxPos]
             } else {
-
+                textView.text = "Unknown"
                 Log.e("CameraActivity", "Invalid index: $maxPos")
             }
 
@@ -154,4 +147,3 @@ class CameraActivity : Fragment(R.layout.fragment_camera) {
         _binding = null
     }
 }
-
