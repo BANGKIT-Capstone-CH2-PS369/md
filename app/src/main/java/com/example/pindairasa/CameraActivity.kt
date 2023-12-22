@@ -116,7 +116,7 @@ class CameraActivity : Fragment(R.layout.fragment_camera) {
             val confidences: FloatArray = outputFeature0.floatArray
 
             for (i in confidences.indices) {
-                Log.d("CameraAct", "Confidence for class $i: ${confidences[i]}")
+                Log.d("CameraActivity", "Confidence for class $i: ${confidences[i]}")
             }
 
             var maxPos = 0
